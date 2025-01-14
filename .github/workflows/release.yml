@@ -1,0 +1,29 @@
+name: release-managed-solution-to-prod
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-to-prod:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Fetch the managed solution
+      uses: actions/download-artifact@v2
+      with:
+        name: GitHubDeploy
+        path: out/release/
+
+    - name: Import managed solution to production
+      uses: microsoft/powerplatform-actions/import-solution@v0
+      with:
+        environment-url: ${{ secrets.PRODUCTION_ENVIRONMENT_URL }}
+        app-id: ${{ secrets.CLIENT_ID }}
+        client-secret: ${{ secrets.CLIENT_SECRET }}
+        tenant-id: ${{ secrets.TENANT_ID }}
+        solution-file: out/release/GitHubDeploy_managed.zip
+        force-overwrite: true
+        publish-changes: true
