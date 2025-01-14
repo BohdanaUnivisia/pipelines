@@ -66,6 +66,7 @@ jobs:
       with:
         name: drop
         path: ${{ github.event.inputs.solution_release_folder}}
+        run-id: 12771717511
         
     - name: Import solution to prod env
       uses: microsoft/powerplatform-actions/import-solution@v0
