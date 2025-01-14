@@ -58,14 +58,14 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: drop
-        path: out/exported/GitHubDeploy_Managed.zip
+        path: ${{ github.event.inputs.solution_shipping_folder}}/${{ github.event.inputs.solution_name }}.zip
     
     - name: Pack solution
       uses: microsoft/powerplatform-actions/pack-solution@v0
       with:
         solution-folder: ${{ github.event.inputs.solution_source_folder}}/${{ github.event.inputs.solution_name }}/Managed
         solution-file: ${{ github.event.inputs.solution_outbound_folder}}/${{ github.event.inputs.solution_name }}.zip
-        solution-type: Managed
+        solution-type: "Managed"
 
     - name: Fetch the ready to ship solution from GH artifact store
       uses: actions/download-artifact@v4
