@@ -50,6 +50,12 @@ jobs:
       RUNNER_DEBUG: 1
 
     steps:
+    - name: Cache Power Platform actions
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip  # If there are cached files related to dependencies, adjust the path accordingly.
+        key: ${{ runner.os }}-power-platform-actions-${{ hashFiles('**/*.yaml') }}
+
     - uses: actions/checkout@v2
       with:
         lfs: true
