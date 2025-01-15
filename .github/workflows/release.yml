@@ -71,7 +71,7 @@ jobs:
         solution-type: "Managed"
         
     - name: Import solution to prod env
-      uses: microsoft/powerplatform-actions/import-solution@v0
+      uses: microsoft/powerplatform-actions/import-solution@v1
       with:
         environment-url: ${{env.PRODUCTION_ENVIRONMENT_URL}}
         app-id: ${{env.CLIENT_ID}}
