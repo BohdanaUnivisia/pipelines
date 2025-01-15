@@ -53,20 +53,21 @@ jobs:
     - name: Install Power Platform Actions
       uses: microsoft/powerplatform-actions/actions-install@v1
 
-    - name: Cache Power Platform actions
-      uses: actions/cache@v3
-      with:
-        path: ~/.cache/pip  # If there are cached files related to dependencies, adjust the path accordingly.
-        key: ${{ runner.os }}-power-platform-actions-${{ hashFiles('**/*.yaml') }}
 
     - uses: actions/checkout@v2
       with:
         lfs: true
+
+    - name: Download exported solution
+      uses: actions/download-artifact@v3
+      with:
+        name: unpacked-solution
+        path: out/solutions/${{ github.event.inputs.solution_name }}
     
     - name: Pack solution
       uses: microsoft/powerplatform-actions/pack-solution@v1
       with:
-        solution-folder: ${{ github.event.inputs.solution_source_folder}}/${{ github.event.inputs.solution_name }}/Managed
+        solution-folder: out/solutions/${{ github.event.inputs.solution_name }}/Managed
         solution-file: ${{ github.event.inputs.solution_outbound_folder}}/${{ github.event.inputs.solution_name }}.zip
         solution-type: "Managed"
         
