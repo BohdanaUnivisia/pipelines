@@ -53,16 +53,9 @@ jobs:
     - name: Install Power Platform Actions
       uses: microsoft/powerplatform-actions/actions-install@v1
 
-
     - uses: actions/checkout@v2
       with:
         lfs: true
-
-    - name: Download exported solution
-      uses: actions/download-artifact@v3
-      with:
-        name: unpacked-solution
-        path: out/solutions/${{ github.event.inputs.solution_name }}
     
     - name: Pack solution
       uses: microsoft/powerplatform-actions/pack-solution@v1
