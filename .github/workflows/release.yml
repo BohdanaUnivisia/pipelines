@@ -50,6 +50,9 @@ jobs:
       RUNNER_DEBUG: 1
 
     steps:
+    - name: Install Power Platform Actions
+      uses: microsoft/powerplatform-actions/actions-install@v1
+
     - name: Cache Power Platform actions
       uses: actions/cache@v3
       with:
